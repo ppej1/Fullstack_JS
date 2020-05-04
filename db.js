@@ -1,51 +1,30 @@
-export const videos= [
+// {
+//     id:324391,
+//     title: "video awesome",
+//     description: "This is Izone I love",
+//     views: 24,
+//     videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+//     creator: {
+//         id : "ppej1",
+//         name:"time P",
+//         email: "ppej@nav.com"
+//     }
+// }
+
+import mongoose from "mongoose";
+
+mongoose.connect("mongodb://localhost:27017/we-tube",
     {
-        id:324391,
-        title: "video awesome",
-        description: "This is Izone I love",
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id : "ppej1",
-            name:"time P",
-            email: "ppej@nav.com"
-        }
-    },
-    {
-        id:324392,
-        title: "video awesome",
-        description: "This is Izone I love",
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id : "ppej1",
-            name:"time P",
-            email: "ppej@nav.com"
-        }
-    },
-    {
-        id:324393,
-        title: "video awesome",
-        description: "This is Izone I love",
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id : "ppej1",
-            name:"time P",
-            email: "ppej@nav.com"
-        }
-    },
-    {
-        id:324394,
-        title: "video awesome",
-        description: "This is Izone I love",
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id : "ppej1",
-            name:"time P",
-            email: "ppej@nav.com"
-        }
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
     }
-    
-]
+);
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("Connected to DB");
+const handleError = error => console.log(`X Error on DB Connection:${error}`)
+
+db.once("open", handleOpen);
+db.on("error", handleError);
