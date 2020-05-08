@@ -1,0 +1,8 @@
+->github website(auth)
+githubwebsite (auth) -> /auth/github/callback
+githubLoginCallback(profile)
+-> cb(null, user)
+
+    cookie = makeCookie(user)
+    saveCookie = saveCookie(cookie)
+    sendCookie(savedCookie)
