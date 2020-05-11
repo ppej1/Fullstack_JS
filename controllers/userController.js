@@ -144,7 +144,7 @@ export const userDetail = async (req, res) => {
         }
     } = req;
     try {
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('videos');
         res.render("userDetail", {
             pageTitle: "유저정보"
         }, user);
@@ -175,11 +175,37 @@ export const postEditProfile = async (req, res) => {
         });
         res.redirect(routes.me);
     } catch (error) {
-        res.render("editProfile", {
-            pageTitle: "Edit Profile"
-        });
+        res.redirect(routes.editProfile);
     }
 }
-export const changePassword = (req, res) => res.render("changePassword", {
-    pageTitle: "비밀번호 변경"
-});
+
+
+
+export const getChangePassword = (req, res) => {
+    res.render("changePassword", {
+        pageTitle: "비밀번호 변경"
+    });
+}
+
+export const postChangePassword = (req, res) => {
+    const {
+        body: {
+            oldPassword,
+            newPassword,
+            newpassword1
+        }
+    } = req;
+    try {
+        if (newPassword !== newpassword1) {
+            res.status(400);
+            res.redirect(`/users${routes.changePassword}`);
+            return;
+        } else {
+            req.user.changePassword(oldPassword, newPassword);
+            res.redirect(routes.me);
+        }
+    } catch (error) {
+        res.status(400);
+        res.render(`/users${routes.changePassword}`)
+    }
+};
