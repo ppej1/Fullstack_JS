@@ -11,6 +11,7 @@ import {
   localsMiddleware
 } from "./middlewares";
 import globalRouter from "./routers/globalRouter";
+import apiRouter from "./routers/apiRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import routes from "./routes";
@@ -53,7 +54,7 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
-
+app.use(routes.api, apiRouter);
 export default app;
 
 //함수만들기
